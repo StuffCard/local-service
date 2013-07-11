@@ -1,17 +1,19 @@
-SERVICE_CONFIG = Yaml.load_file Rails.root.join('config', 'local-service.yml')
+require 'yaml'
 
-LocalService::Application.config.service do |service|
-  service.type = SERVICE_CONFIG['type'].to_sym
+SERVICE_CONFIG = YAML.load_file Rails.root.join('config', 'local-service.yml')
 
-  if service.type == :master
+LocalService::Application.config do |config|
+  config.service.type = SERVICE_CONFIG['type'].to_sym
+
+  if config.service.type == :master
     # Master-Config goes here
 
   else
     # Slave-Config goes here
-    service.location.key  = SERVICE_CONFIG['location']['key']
-    service.location.name = SERVICE_CONFIG['location']['name']
-    service.location.slug = SERVICE_CONFIG['location']['slug']
+    config.service.location.key  = SERVICE_CONFIG['location']['key']
+    config.service.location.name = SERVICE_CONFIG['location']['name']
+    config.service.location.slug = SERVICE_CONFIG['location']['slug']
 
-    service.master.url      = SERVICE_CONFIG['master']['url']
+    config.service.master.url      = SERVICE_CONFIG['master']['url']
   end
 end
