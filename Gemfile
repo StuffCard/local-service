@@ -43,3 +43,9 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# WebSocket
+gem 'websocket-rails'
+
+# Haml
+gem 'haml-rails'
