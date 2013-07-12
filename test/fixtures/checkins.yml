@@ -3,11 +3,11 @@
 one:
   smartcard_id: MyString
   reader_id: MyString
-  location_id: 1
+  location_key: 1
   synced_at: 2013-07-11 20:20:40
 
 two:
   smartcard_id: MyString
   reader_id: MyString
-  location_id: 1
+  location_key: 1
   synced_at: 2013-07-11 20:20:40
