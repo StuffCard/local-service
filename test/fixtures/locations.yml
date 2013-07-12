@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  key: MyString
-  slug: MyString
+  name: Pluto
+  key: lo4KN3mn8y0wMaDDEAroKnLUzVZbSfgc8l2d6FKw
+  slug: pluto
 
 two:
-  name: MyString
-  key: MyString
-  slug: MyString
+  name: Mars
+  key: Vdhon6mdUQzkQ2kLpSPy9J3G9totjS51W0BACtjj
+  slug: mars

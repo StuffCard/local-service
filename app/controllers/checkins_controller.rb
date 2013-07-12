@@ -6,7 +6,7 @@ class CheckinsController < ApplicationController
   end
 
   def create
-    checkin = Checkin.create(checkin_params)
+    checkin = Checkin.new(checkin_params)
     if checkin.save
       head :created
     else
