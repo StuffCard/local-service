@@ -1,5 +1,5 @@
 class CheckinsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: :create
+  skip_before_filter :verify_authenticity_token, if: lambda { action_name == 'create' && request.remote_ip == '127.0.0.1' }
 
   def index
 
