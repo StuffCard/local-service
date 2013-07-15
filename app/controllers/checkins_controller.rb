@@ -7,6 +7,7 @@ class CheckinsController < ApplicationController
 
   def create
     checkin = Checkin.new(checkin_params)
+    checkin.location_key = Rails.application.config.service.location_key if slave_mode?
     if checkin.save
       head :created
     else

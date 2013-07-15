@@ -3,11 +3,11 @@
 one:
   smartcard_id: MyString
   reader_id: MyString
-  location_key: 1
+  location_key: lo4KN3mn8y0wMaDDEAroKnLUzVZbSfgc8l2d6FKw
   synced_at: 2013-07-11 20:20:40
 
 two:
   smartcard_id: MyString
   reader_id: MyString
-  location_key: 1
+  location_key: ACBeZ2MmKJXyB9OLT8OwckUX8hBSCfJhvA5S6PcG
   synced_at: 2013-07-11 20:20:40
