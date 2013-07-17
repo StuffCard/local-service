@@ -33,11 +33,4 @@ LocalService::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
-
-  config.service = ActiveSupport::OrderedOptions.new
-  config.service.type = :slave
-  config.service.location_key  = 'HereGoesTheLocationKey'
-  config.service.location_name = 'And this is who I am'
-  config.service.location_slug = 'this-is-who-i-am'
-  config.service.master_url      = 'http://google.de'
 end

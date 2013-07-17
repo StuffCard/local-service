@@ -4,6 +4,8 @@ LocalService::Application.routes.draw do
 
   resources :checkins, only: [:index, :create]
 
+  post :sync, to: "sync#create", as: :sync
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

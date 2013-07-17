@@ -1,1 +1,14 @@
-type: master
+defaults: &defaults
+  type: master
+  location:
+    key: HereGoesTheLocationKey
+    name: And this is who I am
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

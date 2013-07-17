@@ -1,7 +1,16 @@
-type: slave
-location: 
-  key: HereGoesTheLocationKey
-  name: And this is who I am
-  slug: this-is-who-i-am
-master:
-  url: "http://google.de"
+defaults: &defaults
+  type: slave
+  location:
+    key: HereGoesTheLocationKey
+    name: And this is who I am
+  master:
+    url: "http://google.de"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

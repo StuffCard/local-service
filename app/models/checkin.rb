@@ -1,6 +1,8 @@
 class Checkin < ActiveRecord::Base
-  validates_presence_of :smartcard_id, :reader_id, :location_key
   scope :unsynced, -> { where(synced_at: nil) }
+
+  validates_presence_of :smartcard_id, :reader_id
+  # , :location_key
 
   def sync_with_master
     data = {
