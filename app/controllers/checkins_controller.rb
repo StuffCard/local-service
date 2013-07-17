@@ -1,5 +1,5 @@
 class CheckinsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, if: lambda { action_name == 'create' && request.remote_ip == '127.0.0.1' }
+  skip_before_filter :verify_authenticity_token, if: lambda { action_name == 'create' && (request.remote_ip == '127.0.0.1' || master_mode?)}
 
   def index
     if slave_mode?
