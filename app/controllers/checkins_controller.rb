@@ -2,7 +2,10 @@ class CheckinsController < ApplicationController
   skip_before_filter :verify_authenticity_token, if: lambda { action_name == 'create' && request.remote_ip == '127.0.0.1' }
 
   def index
-
+    if slave_mode?
+      location = Location.find_by_key(Rails.application.config.service.location_key)
+      @checkins = location.absolute_numbers_for_today if location
+    end
   end
 
   def create

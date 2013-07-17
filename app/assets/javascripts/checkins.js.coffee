@@ -1,3 +1,29 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  checkins = $(".chart-container").data('checkins')
+
+  $(".chart-container").highcharts
+    chart:
+      type: "column"
+
+    title:
+      text: "Checkins"
+
+    yAxis:
+      allowDecimals: false
+      title:
+        text: "Checkins Here"
+      labels:
+        format: "{value}x"
+
+    xAxis:
+      allowDecimals: false
+      labels:
+        format: "{value}:00 Uhr"
+
+    series: [
+      {
+        name: "Checkins"
+        data: checkins
+        color: '#785200'
+      }
+    ]

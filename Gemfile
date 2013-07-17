@@ -51,3 +51,5 @@ gem 'websocket-rails'
 
 # Haml
 gem 'haml-rails'
+gem "highcharts-rails"
+
