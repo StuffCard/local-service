@@ -11,7 +11,7 @@ $ ->
     yAxis:
       allowDecimals: false
       title:
-        text: "Checkins Here"
+        text: "Checkins"
       labels:
         format: "{value}x"
 
@@ -22,7 +22,7 @@ $ ->
 
     series: [
       {
-        name: "Checkins"
+        name: "Checkins Here"
         data: checkins
         color: '#785200'
       }
