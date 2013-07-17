@@ -9,12 +9,16 @@ class CheckinsController < ApplicationController
   end
 
   def create
-    checkin = Checkin.new(checkin_params)
-    checkin.location_key = Rails.application.config.service.location_key if slave_mode?
-    if checkin.save
-      head :created
-    else
-      head :bad_request
+    if slave_mode?
+      location = Location.find_by_key(Rails.application.config.service.location_key)
+      checkin = Checkin.new(checkin_params)
+      checkin.location_key = Rails.application.config.service.location_key
+      if checkin.save
+        WebsocketRails[:checkin].trigger :new_checkin, {checkins: location.absolute_numbers_for_today}
+        head :created
+      else
+        head :bad_request
+      end
     end
   end
 
