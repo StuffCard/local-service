@@ -7,6 +7,15 @@ class Location < ActiveRecord::Base
 
   has_many :checkins, primary_key: 'key', foreign_key: 'location_key'
 
+  def self.find_or_create_slave_location
+    location = Location.find_or_create_by_key(Rails.application.config.service.location_key)
+    location.name = Rails.application.config.service.location_name
+    location.slug = Rails.application.config.service.location_slug
+    if location.save
+      location
+    end
+  end
+
   def absolute_numbers_for_today
     start_time = Date.today.to_time + 9.hours # 9 Uhr morgens
     end_time = Time.now + (59-Time.now.min).minutes # Nächste volle Stunde

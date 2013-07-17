@@ -18,11 +18,6 @@ if File.exists? config_file
       config.service.location_slug = SERVICE_CONFIG['location']['slug']
 
       config.service.master_url      = SERVICE_CONFIG['master']['url']
-
-      location = Location.find_or_create_by_key(config.service.location_key)
-      location.name = config.service.location_name
-      location.slug = config.service.location_slug
-      location.save
     end
   end
 end
