@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130711182040) do
+ActiveRecord::Schema.define(version: 20130718132108) do
 
   create_table "checkins", force: true do |t|
     t.string   "smartcard_id"
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20130711182040) do
   create_table "locations", force: true do |t|
     t.string   "name"
     t.string   "key"
-    t.string   "slug",       limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end

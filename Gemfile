@@ -54,3 +54,5 @@ gem 'haml-rails'
 
 gem "highcharts-rails"
 gem 'httparty'
+
+gem 'hirb'

@@ -6,7 +6,7 @@ class CheckinsControllerTest < ActionController::TestCase
       post :create, checkin: {smartcard_id: "123", reader_id: "1"}
     end
     assert_response :success
-    assert_equal Rails.application.config.service.location_key, Checkin.last.location_key
+    assert_equal Rails.application.config.service.location.key, Checkin.last.location_key
   end
 
   test "should fail to create checkin with invalid data" do

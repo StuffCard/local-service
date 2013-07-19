@@ -4,7 +4,9 @@ LocalService::Application.routes.draw do
 
   resources :checkins, only: [:index, :create]
 
-  post :sync, to: "sync#create", as: :sync
+  if Rails.application.config.service.type == :master
+    post :sync, to: "sync#create", as: :sync
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,8 +3,7 @@ defaults: &defaults
   location:
     key: HereGoesTheLocationKey
     name: And this is who I am
-  master:
-    url: "http://google.de"
+  master-url: "http://google.de"
 
 development:
   <<: *defaults

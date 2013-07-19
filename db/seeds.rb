@@ -1,7 +1,7 @@
-location1 = Location.create! name: "Coffee", slug: 'coffee'
-location2 = Location.create! name: "Speakers Room", slug: 'speaker'
-location3 = Location.create! name: "Drinks", slug: 'drink'
-location4 = Location.create! name: "Play some table soccer", slug: 'soccer'
-location5 = Location.create! name: "Hacktrack", slug: 'hack'
-location6 = Location.create! name: "Foodstation (Meat)", slug: 'meat'
-location7 = Location.create! name: "FoodStation (Veggie)", slug: 'veggie'
+location1 = Location.create! name: "Coffee"
+location2 = Location.create! name: "Speakers Room"
+location3 = Location.create! name: "Drinks"
+location4 = Location.create! name: "Play some table soccer"
+location5 = Location.create! name: "Hacktrack"
+location6 = Location.create! name: "Foodstation (Meat)"
+location7 = Location.create! name: "FoodStation (Veggie)"

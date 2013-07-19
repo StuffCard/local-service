@@ -1,4 +1,5 @@
 $ ->
+  title = $(".chart-container").data('title')
   checkins = $(".chart-container").data('checkins')
 
   $(".chart-container").highcharts
@@ -22,7 +23,7 @@ $ ->
 
     series: [
       {
-        name: "Checkins Here"
+        name: title
         data: checkins
         color: '#785200'
       }
