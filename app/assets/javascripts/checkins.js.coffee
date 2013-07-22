@@ -4,7 +4,7 @@ $ ->
 
   $(".chart-container").highcharts
     chart:
-      type: "column"
+      type: "areaspline"
 
     title:
       text: "Checkins"

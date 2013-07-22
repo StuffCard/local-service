@@ -1,0 +1,12 @@
+:javascript
+  window.location_key = "#{Rails.application.config.service.location[:key]}"
+
+!!!
+%html
+  %head
+    %title LocalService
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    = yield
