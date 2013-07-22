@@ -15,4 +15,8 @@ class SyncController < ApplicationController
         end
       end
   end
+
+  def checkin_params
+    params.require(:checkin).permit(:smartcard_id, :reader_id, :location_key, :created_at)
+  end
 end

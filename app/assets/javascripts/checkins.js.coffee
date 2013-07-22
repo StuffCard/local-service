@@ -14,7 +14,7 @@ $ ->
       title:
         text: "Checkins"
       labels:
-        format: "{value}x"
+        format: "{value}"
 
     xAxis:
       allowDecimals: false

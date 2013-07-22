@@ -56,3 +56,7 @@ gem "highcharts-rails"
 gem 'httparty'
 
 gem 'hirb'
+
+# Delayed Job
+gem 'delayed_job', git: 'git://github.com/collectiveidea/delayed_job.git'
+gem 'delayed_job_active_record', git: 'git://github.com/collectiveidea/delayed_job_active_record.git'

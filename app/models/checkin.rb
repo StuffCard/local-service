@@ -1,6 +1,8 @@
 class Checkin < ActiveRecord::Base
   scope :unsynced, -> { where(synced_at: nil) }
 
+  after_create :sync_with_master
+
   validates_presence_of :smartcard_id, :reader_id
 
   def self.absolute_numbers_for_today
@@ -27,9 +29,13 @@ class Checkin < ActiveRecord::Base
         }
       }
     }
-    response = HTTParty.post("#{Rails.application.config.service.master_url}/checkins", data)
+    response = HTTParty.post("#{Rails.application.config.service.master_url}", data)
     if response.created?
       self.update_attribute :synced_at, Time.now
+    else
+      # mark as failed so it will be retried
+      raise error
     end
   end
+  handle_asynchronously :sync_with_master
 end
