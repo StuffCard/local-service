@@ -3,7 +3,9 @@ defaults: &defaults
   location:
     key: HereGoesTheLocationKey
     name: And this is who I am
-  master-url: "http://google.de"
+  master:
+    sync: "http://master-url/sync"
+    socket: "master-url/websocket"
 
 development:
   <<: *defaults

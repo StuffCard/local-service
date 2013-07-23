@@ -17,7 +17,10 @@ if File.exists? config_file
       # Master-Config goes here
     else
       # Slave-Config goes here
-      config.service.master_url = SERVICE_CONFIG['master-url']
+      config.service.master = {
+        sync: SERVICE_CONFIG['master']['sync'],
+        socket: SERVICE_CONFIG['master']['socket']
+      }
     end
   end
 end

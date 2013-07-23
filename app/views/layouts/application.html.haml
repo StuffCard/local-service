@@ -1,6 +1,10 @@
 :javascript
   window.location_key = "#{Rails.application.config.service.location[:key]}"
 
+- if Rails.application.config.service.type != :master
+  :javascript
+    window.master_websocket = "#{Rails.application.config.service.master[:socket]}"
+
 !!!
 %html
   %head
