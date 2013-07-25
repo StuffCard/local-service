@@ -1,7 +1,15 @@
 $ ->
   title = $(".chart-container").data('title')
   checkins = $(".chart-container").data('checkins')
+
+  # Convert Rails Unix-Time to JS Unix-Time
+  checkins = convertTimestamp(checkins)
+
   colors = ["#FFCC66", "#FF3300", "#993399", "#003366", "#3399FF", "#00FFFF"]
+
+  Highcharts.setOptions
+    global:
+      useUTC: false
 
   $(".chart-container").highcharts
     chart:
@@ -12,18 +20,18 @@ $ ->
 
     yAxis:
       allowDecimals: false
-      title:
-        text: "Checkins"
+      title: false
       labels:
         format: "{value}"
 
     xAxis:
-      allowDecimals: false
-      labels:
-        format: "{value}:00 Uhr"
+      type: 'datetime'
+    #   # allowDecimals: false
+      # labels:
+      #   format: "{value}"
 
     tooltip:
-      headerFormat: "<span style='font-size: 10px'>Checkins um <b>{point.key}:00 Uhr</b></span><br/>"
+      headerFormat: "<span style='font-size: 10px'><b>{point.key} Uhr</b></span><br/>"
 
     plotOptions:
       spline:
@@ -39,3 +47,10 @@ $ ->
       data: checkins
       color: colors[0]
     ]
+
+convertTimestamp = (data) ->
+  # Convert Rails Unix-Time to JS Unix-Time
+  $.each data, (k,v) ->
+    data[k][0] = v[0]*1000
+
+  return data

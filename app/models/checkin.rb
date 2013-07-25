@@ -7,9 +7,9 @@ class Checkin < ActiveRecord::Base
 
   def self.absolute_numbers_for_today
     # Every hour for the past 12 hours
-    start_time = Time.now.beginning_of_hour - 12.hours
-    end_time = Time.now.beginning_of_hour + 1.hour
-    time_slots = {} # Jede Stunde zwischen 7 Uhr und jetzt
+    start_time = DateTime.now.beginning_of_hour - 12.hours
+    end_time = DateTime.now.beginning_of_hour + 1.hour
+    time_slots = {}
 
     while start_time <= end_time do
       time_slots[start_time] = self.where(created_at: [(start_time)..(start_time + 1.hour)], location_key: Rails.application.config.service.location[:key].to_sym).count
@@ -17,7 +17,7 @@ class Checkin < ActiveRecord::Base
     end
 
     result = []
-    time_slots.each{ |k,v| result << [k.hour, v] }
+    time_slots.each{ |k,v| result << [k.to_i, v] }
     result
   end
 

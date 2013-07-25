@@ -25,6 +25,6 @@ class SyncController < ApplicationController
 
   def check_origin
     # Check if origin IP is the one we'd expect it to be
-    if request.remote_ip == Rails.application.config.service.master.ip[checkin_params[:location_key]]
+    head :bad_request unless request.remote_ip == Rails.application.config.service.master.ips[checkin_params[:location_key]]
   end
 end

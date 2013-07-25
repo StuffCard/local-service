@@ -15,7 +15,9 @@ if File.exists? config_file
 
     if config.service.type == :master
       # Master-Config goes here
-      SERVICE_CONFIG['msater']['ip'].each do |key, ip|
+      config.service.master = ActiveSupport::OrderedOptions.new
+      SERVICE_CONFIG['locations'].each do |key, ip|
+        config.service.master.ips = ActiveSupport::OrderedOptions.new if config.service.master.ips == nil
         config.service.master.ips[key] = ip
       end
     else

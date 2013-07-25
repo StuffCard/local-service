@@ -8,11 +8,11 @@ class Location < ActiveRecord::Base
 
   def self.absolute_numbers_for_today
     # Every hour for the past 12 hours
-    end_time = Time.now.beginning_of_hour + 1.hour
+    end_time = DateTime.now.beginning_of_hour + 1.hour
     time_slots = {}
 
     self.all.each do |location|
-      start_time = Time.beginning_of_hour.now - 12.hours
+      start_time = DateTime.now.beginning_of_hour - 12.hours
       while start_time <= end_time do
         # init empty hash
         time_slots[location.name] = {} unless time_slots[location.name].is_a? Hash
@@ -25,7 +25,7 @@ class Location < ActiveRecord::Base
     result = {}
     time_slots.each do |location_name, checkin|
       result[location_name] = [] # init array
-      checkin.each{ |k, v| result[location_name] << [k.hour, v] }
+      checkin.each{ |k, v| result[location_name] << [k.to_i, v] }
     end
 
     result

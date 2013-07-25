@@ -6,6 +6,10 @@ $ ->
 
   local_channel = local_dispatcher.subscribe(window.location_key)
   local_channel.bind "new_checkin", (checkin_data) ->
+
+    # Convert Rails Unix-Time to JS Unix-Time
+    checkin_data.checkins = convertTimestamp(checkin_data.checkins)
+
     chart = $(".chart-container").highcharts()
     $.each(chart.series, (key, series) ->
         if $(".chart-container").data('title') ==  series.name
@@ -29,6 +33,8 @@ $ ->
       $.each(locations_data, (key, data) ->
         series = {name : key, data : [], color : colors[i++]}
 
+        data = convertTimestamp(data)
+
         $.each(data, (index, value) ->
           series.data.push [value[0], value[1]]
         )
@@ -37,3 +43,10 @@ $ ->
       )
 
       chart.redraw()
+
+convertTimestamp = (data) ->
+  # Convert Rails Unix-Time to JS Unix-Time
+  $.each data, (k,v) ->
+    data[k][0] = v[0]*1000
+
+  return data

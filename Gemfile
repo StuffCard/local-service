@@ -60,3 +60,6 @@ gem 'hirb'
 # Delayed Job
 gem 'delayed_job', git: 'git://github.com/collectiveidea/delayed_job.git'
 gem 'delayed_job_active_record', git: 'git://github.com/collectiveidea/delayed_job_active_record.git'
+
+# Quiet assets
+gem 'quiet_assets', :group => :development
