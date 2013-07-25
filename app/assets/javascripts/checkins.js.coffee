@@ -22,12 +22,15 @@ $ ->
       labels:
         format: "{value}:00 Uhr"
 
+    tooltip:
+      headerFormat: "<span style='font-size: 10px'>Checkins um <b>{point.key}:00 Uhr</b></span><br/>"
+
     plotOptions:
       spline:
-        lineWidth: 4
+        lineWidth: 3
         states:
           hover:
-            lineWidth: 5
+            lineWidth: 4
         marker:
             enabled: false
 
