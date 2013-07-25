@@ -6,11 +6,12 @@ class Checkin < ActiveRecord::Base
   validates_presence_of :smartcard_id, :reader_id
 
   def self.absolute_numbers_for_today
-    start_time = Date.today.to_time + 7.hours # 7 Uhr morgens
-    end_time = Time.now + (59-Time.now.min).minutes # Nächste volle Stunde
+    # Every hour for the past 12 hours
+    start_time = Time.now.beginning_of_hour - 12.hours
+    end_time = Time.now.beginning_of_hour + 1.hour
     time_slots = {} # Jede Stunde zwischen 7 Uhr und jetzt
 
-    while start_time < end_time do
+    while start_time <= end_time do
       time_slots[start_time] = self.where(created_at: [(start_time)..(start_time + 1.hour)], location_key: Rails.application.config.service.location[:key].to_sym).count
       start_time = start_time + 1.hour
     end

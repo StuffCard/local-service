@@ -6,7 +6,12 @@ $ ->
 
   local_channel = local_dispatcher.subscribe(window.location_key)
   local_channel.bind "new_checkin", (checkin_data) ->
-   $(".chart-container").highcharts().series[0].setData checkin_data.checkins
+    chart = $(".chart-container").highcharts()
+    $.each(chart.series, (key, series) ->
+        if $(".chart-container").data('title') ==  series.name
+          series.setData checkin_data.checkins
+    )
+
 
 
   if (window.master_websocket != undefined)

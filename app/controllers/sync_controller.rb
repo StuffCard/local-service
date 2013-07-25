@@ -1,5 +1,6 @@
 class SyncController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_filter :check_origin
 
   def create
     if Checkin.where(smartcard_id: checkin_params[:smartcard_id], reader_id: checkin_params[:reader_id], location_key: checkin_params[:location_key], created_at: checkin_params[:created_at]).exists?
@@ -16,7 +17,14 @@ class SyncController < ApplicationController
       end
   end
 
+  protected
+
   def checkin_params
     params.require(:checkin).permit(:smartcard_id, :reader_id, :location_key, :created_at)
+  end
+
+  def check_origin
+    # Check if origin IP is the one we'd expect it to be
+    if request.remote_ip == Rails.application.config.service.master.ip[checkin_params[:location_key]]
   end
 end

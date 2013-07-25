@@ -3,6 +3,8 @@ defaults: &defaults
   location:
     key: HereGoesTheLocationKey
     name: And this is who I am
+  locations:
+    key: IP
 
 development:
   <<: *defaults

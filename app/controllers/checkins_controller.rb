@@ -10,7 +10,11 @@ class CheckinsController < ApplicationController
     checkin.location_key = Rails.application.config.service.location[:key]
     if checkin.save
       # trigger update of view
-      WebsocketRails[Rails.application.config.service.location[:key]].trigger :new_checkin, {checkins: Checkin.absolute_numbers_for_today}
+      if master_mode?
+        WebsocketRails[:sync].trigger :new_sync, Location.absolute_numbers_for_today
+      else
+        WebsocketRails[Rails.application.config.service.location[:key]].trigger :new_checkin, {checkins: Checkin.absolute_numbers_for_today}
+      end
       head :created
     else
       head :bad_request

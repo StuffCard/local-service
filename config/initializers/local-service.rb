@@ -15,6 +15,9 @@ if File.exists? config_file
 
     if config.service.type == :master
       # Master-Config goes here
+      SERVICE_CONFIG['msater']['ip'].each do |key, ip|
+        config.service.master.ips[key] = ip
+      end
     else
       # Slave-Config goes here
       config.service.master = {

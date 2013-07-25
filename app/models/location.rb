@@ -7,12 +7,13 @@ class Location < ActiveRecord::Base
   has_many :checkins, primary_key: 'key', foreign_key: 'location_key'
 
   def self.absolute_numbers_for_today
-    end_time = Time.now + (59-Time.now.min).minutes # Nächste volle Stunde
-    time_slots = {} # Jede Stunde zwischen 7 Uhr und jetzt
+    # Every hour for the past 12 hours
+    end_time = Time.now.beginning_of_hour + 1.hour
+    time_slots = {}
 
     self.all.each do |location|
-      start_time = Date.today.to_time + 7.hours # 7 Uhr morgens
-      while start_time < end_time do
+      start_time = Time.beginning_of_hour.now - 12.hours
+      while start_time <= end_time do
         # init empty hash
         time_slots[location.name] = {} unless time_slots[location.name].is_a? Hash
 
@@ -26,8 +27,6 @@ class Location < ActiveRecord::Base
       result[location_name] = [] # init array
       checkin.each{ |k, v| result[location_name] << [k.hour, v] }
     end
-
-    Rails.logger.debug result.inspect
 
     result
   end
