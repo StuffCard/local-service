@@ -13,4 +13,10 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
+    .hero
+      %p= image_tag "flame_500.png"
+      %h1 RailsCamp 2013
+      %p
+        %span.subheading July 27/28, 2013 &middot; Abenteuerhallen Kalk, Cologne
+
     = yield
