@@ -1,5 +1,8 @@
 class Checkin < ActiveRecord::Base
-  scope :unsynced, -> { where(synced_at: nil) }
+  scope :unsynced, where(synced_at: nil)
+  scope :by_time_and_location, ->(time, location) {
+    where(created_at: [(time)..(time + 1.hour)], location_key: location).count
+  }
 
   after_create :sync_with_master, :unless => Proc.new{ Rails.application.config.service.type == :master }
 
@@ -7,18 +10,13 @@ class Checkin < ActiveRecord::Base
 
   def self.absolute_numbers_for_today
     # Every hour for the past 12 hours
-    start_time = DateTime.now.beginning_of_hour - 12.hours
-    end_time = DateTime.now.beginning_of_hour + 1.hour
-    time_slots = {}
+    start_time = 12.hours.ago.beginning_of_hour
+    end_time = 1.hour.since.beginning_of_hour
+    location = Rails.application.config.service.location[:key].to_sym
 
-    while start_time <= end_time do
-      time_slots[start_time] = self.where(created_at: [(start_time)..(start_time + 1.hour)], location_key: Rails.application.config.service.location[:key].to_sym).count
-      start_time = start_time + 1.hour
+    steps_between(start_time, end_time).map do |time|
+      [time.to_i, by_time_and_location(time, location)]
     end
-
-    result = []
-    time_slots.each{ |k,v| result << [k.to_i, v] }
-    result
   end
 
   def sync_with_master
@@ -41,4 +39,11 @@ class Checkin < ActiveRecord::Base
     end
   end
   handle_asynchronously :sync_with_master
+
+
+  private
+
+  def self.steps_between(start_time, end_time, step = 1.hour)
+    (start_time.to_i..end_time.to_i).step(1.hour).to_a.map{ |time| Time.at(time) }
+  end
 end
