@@ -1,6 +1,7 @@
 $ ->
   title = $(".chart-container").data('title')
   checkins = $(".chart-container").data('checkins')
+  currentTime = $('.chart-container').data('current-time')
 
   # Convert Rails Unix-Time to JS Unix-Time
   checkins = convertTimestamp(checkins)
@@ -47,6 +48,13 @@ $ ->
       data: checkins
       color: colors[0]
     ]
+
+  chart = $('.chart-container').highcharts()
+  chart.xAxis[0].addPlotLine
+    value: currentTime,
+    color: 'red',
+    width: 2,
+    id: 'current-time-indicator'
 
 convertTimestamp = (data) ->
   # Convert Rails Unix-Time to JS Unix-Time
