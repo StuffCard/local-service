@@ -3,6 +3,8 @@ class CheckinsController < ApplicationController
 
   def index
     @checkins = Checkin.absolute_numbers_for_today
+    @service_name = Rails.application.config.service.location[:name]
+    @current_time = DateTime.now.beginning_of_hour.to_i * 1000
   end
 
   def create
